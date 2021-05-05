@@ -1,7 +1,7 @@
 ﻿@model BookStoreMVC.ViewModel.BookViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Book List";
 }
 
 <br />
@@ -9,7 +9,9 @@
     <div class="col-9">
         <h2 class="text-info">Book List </h2>
     </div>
-    
+    <div class="col-3">
+        <a class="btn btn-info text-white"  asp-action="Upsert" asp-controller="Books">Add New Book</a>
+    </div>
 
     <div class="col-12 border p-3 mt-3">
         <form method="post">

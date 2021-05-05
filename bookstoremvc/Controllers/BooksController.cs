@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace BookStoreMVC.Controllers
 {
     public class BooksController : Controller
@@ -19,6 +20,28 @@ namespace BookStoreMVC.Controllers
         {
             var bookViewModel = new BookViewModel { Books = _context.Books };
             return View(bookViewModel);
+        }
+
+
+        
+
+        public Book Book { get; set; }
+        public IActionResult Upsert()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Book model)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Add(model);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }
