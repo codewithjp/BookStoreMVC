@@ -4,7 +4,9 @@
     ViewData["Title"] = "Book List";
 }
 
-<link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />
+<link href="~/lib/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <br />
 <div class="container row p-0 m-0">
@@ -61,59 +63,36 @@
     </div>
     <div class="col-12  p-3 mt-3">
         <h3 class="text-center">OR</h3>
-        </div>
-
-        <div class="col-12 border p-3 mt-3">
-            <table class="table table-bordered table-striped" width="100%" id="dataTable">
-                <thead>
-                    <tr>
-                        <th>
-                            <label>Name</label>
-                        </th>
-                        <th>
-
-                            <label>Author</label>
-                        </th>
-                        <th>
-                            <label>ISBN</label>
-                        </th>
-
-                    </tr>
-                </thead>
-            </table>
-        </div>
-
     </div>
 
-    @section scripts{
+    <div class="col-12 border p-3 mt-3">
+        <table class="table table-bordered table-striped" width="100%" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        <label>Name</label>
+                    </th>
+                    <th>
 
-        <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+                        <label>Author</label>
+                    </th>
+                    <th>
+                        <label>ISBN</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 
-        <script>
-            var dataTable;
-            $(document).ready(function () {
-                loadDataTable();
-            })
-            function loadDataTable() {
-                dataTable = $("#dataTable").DataTable({
-                    "ajax": {
-                        url: "/api/books",
-                        method: "GET",
-                        dataType: "json"
-                    },
-                    "columns": [
+</div>
 
-                        { width: "30%", data: "name" },
-                        { width: "25%", data: "author" },
-                        { width: "25%", data: "isbn" }
-                    ],
-                    "language": {
-                        "emptyTable": "No data found"
-                    }, width: "100%"
-                })
-            }
+@section scripts{
 
-        </script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
+    <script src="~/lib/bootstrap-sweetalert/sweetalert.js"></script>
+    <script src="~/lib/app/app.js"></script>
 
-    }
+}

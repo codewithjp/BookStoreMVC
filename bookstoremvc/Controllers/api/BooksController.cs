@@ -24,5 +24,17 @@ namespace BookStoreMVC.Controllers.api
         {
             return Json(new { data = await _context.Books.ToListAsync() });
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBook(int id)
+        {
+            var bookInDb = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (bookInDb == null)
+                return Json(new{status=false,msg="Data not found." });
+             _context.Remove(bookInDb);
+            await _context.SaveChangesAsync();
+            return Json(new { status = true, msg = "Book is deleted successfully." });
+
+        }
     }
 }
