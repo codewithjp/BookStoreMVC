@@ -22,10 +22,7 @@ namespace BookStoreMVC.Controllers
             return View(bookViewModel);
         }
 
-
-        
-
-        public Book Book { get; set; }
+     
         public IActionResult Upsert()
         {
             return View();
@@ -43,5 +40,40 @@ namespace BookStoreMVC.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public  IActionResult Update(int id)
+        {
+            var bookInDb = _context.Books.FirstOrDefault(b => b.Id == id);
+            if (bookInDb == null)
+                return NotFound();
+            return View(bookInDb);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Book model)
+        {
+            var bookInDb = _context.Books.FirstOrDefault(b => b.Id == model.Id);
+            if (bookInDb == null)
+                return NotFound();
+            bookInDb.ISBN = model.ISBN;
+            bookInDb.Author = model.Author;
+            bookInDb.Name = model.Name;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+       
+        public IActionResult Delete(int id)
+        {
+            var bookInDb = _context.Books.FirstOrDefault(b => b.Id == id);
+            if (bookInDb == null)
+                return NotFound();
+
+            _context.Remove(bookInDb);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
